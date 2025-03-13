@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import EventList from '../components/EventList/EventList';
 import EventFilter from '../components/EventFilter/EventFilter';
+import EventList from '../components/EventList/EventList';
 
 const HomePage = () => {
   const [events, setEvents] = useState([]);
@@ -22,8 +22,22 @@ const HomePage = () => {
             limit: 5,
           },
         });
-        setEvents(prevEvents => [...prevEvents, ...response.data.data]);
-        console.log(response.data.data);  
+        const eventData = response.data.data.map(event => ({
+          id: event.id,
+          name: event.attributes.name,
+          description: event.attributes.description,
+          location: event.attributes['location-name'],
+          thumbnailImageUrl: event.attributes['thumbnail-image-url'],
+          largeImageUrl: event.attributes['large-image-url'],
+          iconImageUrl: event.attributes['icon-image-url'],
+          chatRoomName: event.attributes['chat-room-name'],
+          timezone: event.attributes.timezone,
+          privacy: event.attributes.privacy,
+          paymentCurrency: event.attributes['payment-currency'],
+          ownerName: event.attributes['owner-name'],
+          ownerDescription: event.attributes['owner-description'],
+        }));
+        setEvents(prevEvents => [...prevEvents, ...eventData]);
       } catch (error) {
         console.error('Error fetching events:', error);
       } finally {

@@ -5,12 +5,19 @@ const EventList = ({ events }) => {
   return (
     <div className="event-list">
       {events.map(event => (
-        <div key={event.id} className="event-item">
-          <h3>{event.attributes.name}</h3>
-          <p>{event.attributes.description}</p>
-          <p><strong>Location:</strong> {event.attributes.location_name}</p>
-          <p><strong>Starts At:</strong> {new Date(event.attributes.starts_at).toLocaleString()}</p>
-          <p><strong>Ends At:</strong> {new Date(event.attributes.ends_at).toLocaleString()}</p>
+        <div key={event.id} className="event-card">
+          <h2>{event.name}</h2>
+          <p>{event.description}</p>
+          <p><strong>Location:</strong> {event.location}</p>
+          <p><strong>Timezone:</strong> {event.timezone}</p>
+          <p><strong>Privacy:</strong> {event.privacy}</p>
+          <p><strong>Payment Currency:</strong> {event.paymentCurrency}</p>
+          <p><strong>Owner Name:</strong> {event.ownerName}</p>
+          <p><strong>Owner Description:</strong> {event.ownerDescription}</p>
+          <p><strong>Chat Room Name:</strong> {event.chatRoomName}</p>
+          {event.thumbnailImageUrl && <img src={event.thumbnailImageUrl} alt={event.name} />}
+          {event.largeImageUrl && <img src={event.largeImageUrl} alt={event.name} />}
+          {event.iconImageUrl && <img src={event.iconImageUrl} alt={event.name} />}
         </div>
       ))}
     </div>
