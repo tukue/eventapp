@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './EventFilter.css';
+// import './EventFilter.css';
+import styles from './EventFilter.module.css';
 
 const EventFilter = ({ onFilter }) => {
   const [searchTerm, setSearchTerm] = useState('');

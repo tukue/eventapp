@@ -1,6 +1,7 @@
 import React from 'react';
 import DOMPurify from 'dompurify';
-import './EventList.css';
+import styles from './EventList.module.css';
+// import './EventList.css';
 
 const EventList = ({ events }) => {
   return (
