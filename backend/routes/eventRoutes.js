@@ -1,5 +1,6 @@
 const express = require('express');
 const { fetchOpenEventConferences } = require('../services/openEventService');
+const { getAndStoreEvents } = require('../controllers/dbEventController');
 
 const router = express.Router();
 
@@ -14,4 +15,5 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/store', getAndStoreEvents);
 module.exports = router;

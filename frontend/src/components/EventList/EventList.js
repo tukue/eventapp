@@ -1,4 +1,5 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 import './EventList.css';
 
 const EventList = ({ events }) => {
@@ -7,7 +8,7 @@ const EventList = ({ events }) => {
       {events.map(event => (
         <div key={event.id} className="event-card">
           <h2>{event.name}</h2>
-          <p>{event.description}</p>
+          <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.description) }}></p>
           <p><strong>Location:</strong> {event.location}</p>
           <p><strong>Timezone:</strong> {event.timezone}</p>
           <p><strong>Privacy:</strong> {event.privacy}</p>
