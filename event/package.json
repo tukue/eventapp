@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 5005",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 5005",
-    "lint": "next lint",
-    "test": "jest --testMatch '**/frontend/src/pages/**/*.test.js'"
+    "start": "next start"
   },
   "dependencies": {
     "dompurify": "^3.2.4",
