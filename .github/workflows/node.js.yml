@@ -24,8 +24,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install dependencies
-      run: npm install
-      working-directory: ./frontend
+      run: |
+        cd frontend
+        if [ -f package-lock.json ]; then
+          npm ci
+        else
+          npm install
+        fi
     - name: Build the application
       run: npm run build
       working-directory: ./frontend
