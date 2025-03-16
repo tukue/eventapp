@@ -6,7 +6,7 @@ EventApp is a web application for managing and displaying events. It consists of
 
 ### Prerequisites
 
-- Node.js (version 14.x or later)
+- Node.js (version 20.x or later)
 - npm (version 6.x or later)
 - postgres db
   
