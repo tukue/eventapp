@@ -17,7 +17,7 @@ start the backend server :
 cd backend
 npm start 
 
-start the frontend application :
+starting the frontend application :
 npm run dev 
 Build app:
 npm run build 
