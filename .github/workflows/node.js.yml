@@ -28,6 +28,13 @@ jobs:
           cd backend
           npm install
 
+      - name: Run backend tests
+        run: |
+          cd backend
+          npm test
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Install frontend dependencies
         run: |
           cd frontend
