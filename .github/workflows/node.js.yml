@@ -1,7 +1,11 @@
-name: Build on Push
+name: CI/CD Pipeline
 
 on:
   push:
+    branches:
+      - main
+      - 'feature/*'
+  pull_request:
     branches:
       - main
       - 'feature/*'
@@ -24,10 +28,20 @@ jobs:
           cd backend
           npm install
 
+      - name: Run backend tests
+        run: |
+          cd backend
+          npm test
+
       - name: Install frontend dependencies
         run: |
           cd frontend
           npm install
+
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test
 
       - name: Build frontend
         run: |
