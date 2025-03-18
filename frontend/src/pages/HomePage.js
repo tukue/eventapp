@@ -10,10 +10,12 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
       setLoading(true);
+      setError(null);
       try {
         const response = await axios.get(process.env.NEXT_PUBLIC_BACKEND_API_URL, {
           params: {
@@ -40,6 +42,7 @@ const HomePage = () => {
         setEvents(prevEvents => [...prevEvents, ...eventData]);
       } catch (error) {
         console.error('Error fetching events:', error);
+        setError('Error loading events');
       } finally {
         setLoading(false);
       }
@@ -60,9 +63,11 @@ const HomePage = () => {
   return (
     <div>
       <EventFilter onFilter={handleFilter} />
+      {error && <p>{error}</p>}
       <EventList events={events} />
       {loading && <p>Loading...</p>}
-      {!loading && <button onClick={loadMore}>Load More</button>}
+      {!loading && !error && events.length === 0 && <p>No events available</p>}
+      {!loading && !error && events.length > 0 && <button onClick={loadMore}>Load More</button>}
     </div>
   );
 };

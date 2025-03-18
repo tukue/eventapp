@@ -38,9 +38,29 @@ describe('HomePage', () => {
     });
   });
 
-  it('displays a loading message while fetching events', () => {
-    render(<HomePage />);
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+  it('displays an error message if the API call fails', async () => {
+    mock.onGet(process.env.NEXT_PUBLIC_BACKEND_API_URL).reply(500);
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Error loading events')).toBeInTheDocument();
+    });
+  });
+
+  it('displays no events message if no events are returned', async () => {
+    mock.onGet(process.env.NEXT_PUBLIC_BACKEND_API_URL).reply(200, { data: [] });
+
+    await act(async () => {
+      render(<HomePage />);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('No events available')).toBeInTheDocument();
+    });
   });
 
 
@@ -82,7 +102,9 @@ describe('HomePage', () => {
       expect(screen.getByText('Event 1')).toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByText('Load More'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Load More'));
+    });
 
     await waitFor(() => {
       expect(screen.getByText('Event 2')).toBeInTheDocument();
