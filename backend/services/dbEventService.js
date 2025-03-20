@@ -2,7 +2,7 @@ const axios = require('axios');
 const Event = require('../models/Event');
 
 const fetchOpenEventConferences = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.eventyay.com/v1/events?is_free=true';
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const response = await axios.get(apiUrl);
   const events = response.data.data;
 
